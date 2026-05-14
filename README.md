@@ -1,123 +1,82 @@
-<div align="center">
-  <h1>Algorithms Visualizers</h1>
-  <h2>Responsive visualizers built using React for popular algorithms</h2>
-  <div>
-    <a name="stars"><img src="https://img.shields.io/github/stars/sadanandpai/algo-visualizers?style=for-the-badge"></a>
-    <a name="forks"><img src="https://img.shields.io/github/forks/sadanandpai/algo-visualizers?logoColor=green&style=for-the-badge"></a>
-    <a name="license"><img src="https://img.shields.io/github/license/sadanandpai/algo-visualizers?style=for-the-badge"></a>
-  </div>
+# AlgoLab — Watch Algorithms Come Alive
 
-[![built with Codeium](https://codeium.com/badges/main)](https://codeium.com)
+Interactive web app that animates classic CS algorithms step-by-step. Built to make sorting, pathfinding, and maze generation visually (and audibly) intuitive.
 
-<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/cell.png" alt="cover" /></a>
-<br/>
-<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/bar.png" alt="cover" /></a>
-<br/>
-<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/path.png" alt="cover" /></a>
-<a href="https://sadanandpai.github.io/algo-visualizers/">Visualize the
-algorithms</a>
-
-</div>
+> **Live demo:** _coming soon — deploy URL goes here_
 
 ---
 
-### Algorithms Visualizers
+## Features
 
-This repo helps in learning popular algorithms by visualization
-
-<details>
-  <summary>Sorting Visualizer</summary>
-
-<br>
-
-Helps to
-
-- understand the working of sorting algorithm
-- check total swaps required
-- check total comparisions
-- compare algorithms side by side
-- know the time taken (time is just an approximate unit for comparision)
-
-Features
-
-- Sort any given array of 3 digits positive integers
-- Alter the speed of execution
-- Start, pause and reset the execution
-- Generate random array of numbers of sorting
-
-Concepts
-
-- Animations are done using pure CSS and uses
-  [FLIP principle](https://aerotwist.com/blog/flip-your-animations/)
-- Flex is used for array display and manipulation of positions (flex order
-  property)
-- JavaScript async generators are used heavily for the controlled execution of
-  algorithms
-
-</details>
-
-<br>
-
-<details>
-  <summary>Path finder</summary>
-
-<br>
-
-Helps to
-
-- understand working of different maze generation algorithms
-- understand working of different path finding algorithms
-- check the visits, path length and time taken
-
-Features
-
-- Build any kind of custom 2D maze
-- Alter the speed of execution
-- Generate infinite mazes
-- Move the targets in live to see the changes
-
-</details>
-
-<br>
-
-### Technologies
-
-Production libraries
-
-- [React](https://react.dev/) (Frontend Library)
-- [Redux Toolkit](https://redux-toolkit.js.org/) (State management)
-- [React Router](https://reactrouter.com/en/main/) (Router)
-- [Lucide](https://lucide.dev/) (Icons pack)
-- [Sonner](https://sonner.emilkowal.ski/) (Toast)
-- [React-use](https://github.com/streamich/react-use) (Custom hooks)
-- [React Joyride](https://react-joyride.com/) (App tour)
-- [React Switch](https://react-switch.netlify.app/) (Switch)
-
-Build libraries
-
-- [Sass](https://sass-lang.com/) (CSS compiler)
-- [Vite](https://vitejs.dev/) (Bundler)
-- [Vitest](https://vitest.dev/) (Unit test)
-- [Cypress](https://www.cypress.io/) (E2E test)
-
-<br>
-
-### Run in your local
-
-- `git clone https://github.com/sadanandpai/algo-visualizers.git`
-- `cd algo-visualizers`
-- `npm install`
-- `npm run dev`
+- **Sorting Visualizer** — Bubble, Selection, Insertion, Merge, Quick, Heap, Shell, Cocktail. Watch swaps and comparisons play out on a cell grid or a bar chart, with live counts.
+- **Pathfinder** — Place start/end points on a grid, draw walls, and watch BFS, DFS, Dijkstra, and A\* explore the grid in real time. Includes a maze generator.
+- **Sound effects** — Toggle audible tones on sort steps. Each comparison/swap plays a short pitch mapped to the value being touched, so each algorithm has its own distinct "sound."
+- **Speed control** — Pause, resume, reset, and adjust execution speed.
+- **Dark / light theme** — Persisted between sessions.
 
 ---
 
-### Contributing Guide
+## Tech Stack
 
-If you want to contribute, improve or fix bugs in this repo, then check out the
-[Contributing Guide](./CONTRIBUTING.md) <br/>
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 19 |
+| Language | TypeScript |
+| Build tool | Vite |
+| State | Redux Toolkit + redux-persist |
+| Routing | React Router |
+| Styling | SCSS modules + Tailwind |
+| Audio | Web Audio API (no audio files bundled) |
+| Testing | Vitest, Cypress |
 
-<br>
+---
 
-### License
+## Run Locally
 
-This repository is MIT licensed. [Read more](./LICENSE)
+```bash
+git clone https://github.com/Rahul200512/algolab.git
+cd algolab
+npm install
+npm run dev
+```
+
+The dev server runs at `http://localhost:5173`.
+
+### Available scripts
+
+```bash
+npm run dev       # start dev server
+npm run build     # type-check + production build
+npm run preview   # preview production build
+npm run test      # run unit tests (vitest)
+npm run lint      # oxlint + stylelint
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── host/              # App shell — routing, theme, store wiring
+├── lib/               # Shared components (navbar, footer, theme icon) and helpers
+│   └── helpers/
+│       └── sound.ts   # Web Audio tone generator used by the sort hook
+└── apps/
+    ├── sorting-visualizer/   # Sorting algorithms + visualizer UI + redux slice
+    └── path-finder/          # Pathfinding algorithms + grid UI
+```
+
+The sorting and pathfinder apps each manage their own Redux slice, components, and algorithm implementations — they share only the `lib/` primitives and the host shell.
+
+---
+
+## Credits
+
+Originally based on the open-source [`algo-visualizers`](https://github.com/sadanandpai/algo-visualizers) project (MIT). This fork is rebranded as AlgoLab and adds the Web Audio sound-effects feature.
+
+---
+
+## License
+
+MIT
