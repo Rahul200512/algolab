@@ -10,6 +10,7 @@ import { AppDispatch } from '@/host/store/store';
 import { AppState } from '@sortViz/models/interfaces';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { soundManager } from '@/lib/helpers/sound';
 
 const initialState: AppState = {
   array: initialArray,
@@ -20,6 +21,7 @@ const initialState: AppState = {
   speed: 5,
   timeIntervalId: null,
   selectedAlgosStatus,
+  soundEnabled: false,
 };
 
 function setIntervals(state: AppState) {
@@ -81,6 +83,11 @@ export const sortingVisualizerSlice = createSlice({
       state.visualizerType = state.visualizerType === 'cell' ? 'bar' : 'cell';
       setIntervals(state);
     },
+
+    toggleSound: (state) => {
+      state.soundEnabled = !state.soundEnabled;
+      soundManager.setEnabled(state.soundEnabled);
+    },
   },
 });
 
@@ -93,6 +100,7 @@ export const {
   incrementTime,
   modifyAlgoSelection,
   toggleVisualizerType,
+  toggleSound,
 } = sortingVisualizerSlice.actions;
 export default sortingVisualizerSlice.reducer;
 

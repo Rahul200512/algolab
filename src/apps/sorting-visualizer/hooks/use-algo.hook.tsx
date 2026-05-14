@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { SortAsyncGenerator } from '@sortViz/models/types';
 import { simulator } from '@sortViz/store/global.state';
+import { soundManager } from '@/lib/helpers/sound';
 
 function useAlgo(
   array: number[],
@@ -18,6 +19,9 @@ function useAlgo(
   const swapCount = useRef(0);
   const compareCount = useRef(0);
 
+  // Cache max value once for stable pitch mapping across the run.
+  const maxValue = useRef(array.length ? Math.max(...array) : 1);
+
   const fn = async () => {
     await simulator.isPlayingPromise;
 
@@ -32,6 +36,11 @@ function useAlgo(
           setSwaps(data.positions);
           if (data.positions[0] !== data.positions[1]) {
             swapCount.current++;
+            soundManager.play(
+              array[data.positions[0]] ?? 0,
+              maxValue.current,
+              'swap'
+            );
           }
           break;
         case 'sort':
@@ -41,6 +50,11 @@ function useAlgo(
           setHighlights(data.positions);
           if (data.positions[0] !== data.positions[1]) {
             compareCount.current++;
+            soundManager.play(
+              array[data.positions[0]] ?? 0,
+              maxValue.current,
+              'compare'
+            );
           }
           break;
         case 'pivot':
@@ -51,6 +65,11 @@ function useAlgo(
           setMoves(data.positions);
           if (data.positions[0] !== data.positions[1]) {
             swapCount.current++;
+            soundManager.play(
+              array[data.positions[0]] ?? 0,
+              maxValue.current,
+              'swap'
+            );
           }
           break;
       }

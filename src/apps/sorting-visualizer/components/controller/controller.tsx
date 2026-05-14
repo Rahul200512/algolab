@@ -5,6 +5,7 @@ import {
 
 import ArrayInput from './array-input';
 import Execution from './execution';
+import SoundSwitch from './sound-switch';
 import TypeSwitch from './type-switch';
 import classes from './controls.module.scss';
 import { useAppDispatch } from '@/host/store/hooks';
@@ -26,7 +27,10 @@ function Controller() {
         <ArrayInput />
         <Execution />
       </div>
-      <TypeSwitch />
+      <div className={classes.switchContainer}>
+        <TypeSwitch />
+        <SoundSwitch />
+      </div>
     </section>
   );
 }

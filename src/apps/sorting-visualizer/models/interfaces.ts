@@ -51,4 +51,5 @@ export interface AppState {
   speed: number;
   timeIntervalId: number | null;
   selectedAlgosStatus: boolean[];
+  soundEnabled: boolean;
 }
