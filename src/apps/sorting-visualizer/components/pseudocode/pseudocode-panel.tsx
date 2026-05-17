@@ -1,4 +1,5 @@
 import { getMeta } from '@sortViz/sorting-algorithms/algo-metadata';
+import { useActiveLine } from '@sortViz/store/active-line';
 import classes from './pseudocode-panel.module.scss';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 
 function PseudocodePanel({ algoName }: Props) {
   const meta = getMeta(algoName);
+  const activeLine = useActiveLine();
 
   if (meta.pseudocode.length === 0) return null;
 
@@ -38,7 +40,12 @@ function PseudocodePanel({ algoName }: Props) {
 
       <pre className={classes.code}>
         {meta.pseudocode.map((line, idx) => (
-          <div key={idx} className={classes.line}>
+          <div
+            key={idx}
+            className={`${classes.line} ${
+              idx === activeLine ? classes.activeLine : ''
+            }`}
+          >
             <span className={classes.lineNumber}>{idx + 1}</span>
             <code>{line}</code>
           </div>

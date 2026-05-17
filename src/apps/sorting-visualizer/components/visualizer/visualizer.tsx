@@ -9,6 +9,8 @@ import useAlgo from '@sortViz/hooks/use-algo.hook';
 interface RaceProps extends VisualizerProps {
   /** Finish position assigned by parent (1 = first). Optional — only used in race mode. */
   rank?: number;
+  /** When true, publish the active pseudocode line (single-algorithm view only). */
+  trackLine?: boolean;
 }
 
 const Visualizer = function Visualizer({
@@ -17,6 +19,7 @@ const Visualizer = function Visualizer({
   algoName = 'Bubble',
   onComplete,
   rank,
+  trackLine = false,
 }: RaceProps) {
   const sortingArray = useRef([...array]);
 
@@ -29,7 +32,7 @@ const Visualizer = function Visualizer({
     highlights,
     pivot,
     moves,
-  } = useAlgo(sortingArray.current, algoFn);
+  } = useAlgo(sortingArray.current, algoFn, algoName, trackLine);
 
   useEffect(() => {
     if (isCompleted) {

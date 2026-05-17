@@ -3,6 +3,20 @@
  * Kept in a single map so UI components (Header, Pseudocode panel) stay in sync.
  */
 
+/**
+ * Maps an algorithm step type to the 0-based pseudocode line it best
+ * corresponds to. Used to highlight the "currently executing" line while
+ * the visualization runs. Approximate by design — it tracks the dominant
+ * line for each step kind, which is enough to read along visually.
+ */
+export interface StepLineMap {
+  highlight: number;
+  swap: number;
+  sort: number;
+  pivot: number;
+  move: number;
+}
+
 export interface AlgoMetadata {
   displayName: string;
   best: string;
@@ -11,6 +25,7 @@ export interface AlgoMetadata {
   space: string;
   description: string;
   pseudocode: string[];
+  lineFor: StepLineMap;
 }
 
 export const algoMetadata: Record<string, AlgoMetadata> = {
@@ -31,6 +46,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '      swapped = true',
       '  if not swapped: break',
     ],
+    lineFor: { highlight: 3, swap: 4, sort: 6, pivot: -1, move: -1 },
   },
   selection: {
     displayName: 'Selection Sort',
@@ -48,6 +64,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '      minIndex = j',
       '  swap arr[i], arr[minIndex]',
     ],
+    lineFor: { highlight: 3, swap: 5, sort: 0, pivot: -1, move: -1 },
   },
   insertion: {
     displayName: 'Insertion Sort',
@@ -66,6 +83,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '    j = j - 1',
       '  arr[j + 1] = key',
     ],
+    lineFor: { highlight: 3, swap: 4, sort: 6, pivot: -1, move: 4 },
   },
   heap: {
     displayName: 'Heap Sort',
@@ -82,6 +100,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '  heap-size = i',
       '  heapify(arr, 0)',
     ],
+    lineFor: { highlight: 4, swap: 2, sort: 1, pivot: -1, move: -1 },
   },
   merge: {
     displayName: 'Merge Sort',
@@ -99,6 +118,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '  mergeSort(arr, mid + 1, right)',
       '  merge(arr, left, mid, right)',
     ],
+    lineFor: { highlight: 5, swap: 5, sort: 1, pivot: -1, move: 5 },
   },
   quick: {
     displayName: 'Quick Sort',
@@ -115,6 +135,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '  quickSort(arr, low, pivot - 1)',
       '  quickSort(arr, pivot + 1, high)',
     ],
+    lineFor: { highlight: 2, swap: 2, sort: 2, pivot: 2, move: 2 },
   },
   shell: {
     displayName: 'Shell Sort',
@@ -134,6 +155,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '      j -= gap',
       '    arr[j] = temp',
     ],
+    lineFor: { highlight: 4, swap: 5, sort: 7, pivot: -1, move: 5 },
   },
   cocktail: {
     displayName: 'Cocktail Sort',
@@ -155,6 +177,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
       '  start += 1',
       'while swapped',
     ],
+    lineFor: { highlight: 3, swap: 3, sort: 4, pivot: -1, move: -1 },
   },
 };
 
@@ -168,6 +191,7 @@ export function getMeta(name: string): AlgoMetadata {
       space: '—',
       description: '',
       pseudocode: [],
+      lineFor: { highlight: -1, swap: -1, sort: -1, pivot: -1, move: -1 },
     }
   );
 }

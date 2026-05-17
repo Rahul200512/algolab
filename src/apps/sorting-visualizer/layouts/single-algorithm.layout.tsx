@@ -47,6 +47,7 @@ function SingleAlgorithmLayout() {
           algoName={selectedAlgo.name}
           algoFn={selectedAlgo.fn}
           onComplete={onComplete}
+          trackLine
         />
         <PseudocodePanel algoName={selectedAlgo.name} />
       </div>

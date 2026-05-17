@@ -63,10 +63,25 @@
 .line {
   display: flex;
   gap: 12px;
+  padding: 0 6px;
+  margin: 0 -6px;
   white-space: pre;
+  border-radius: 3px;
+  transition: background-color 0.12s ease;
 
   code {
     color: theme.$light;
+  }
+}
+
+.activeLine {
+  background-color: theme.$primary;
+
+  code,
+  .lineNumber {
+    font-weight: 600;
+    color: theme.$light;
+    opacity: 1;
   }
 }
 
