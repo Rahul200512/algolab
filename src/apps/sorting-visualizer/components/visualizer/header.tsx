@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { HeaderProps } from '@sortViz/models/interfaces';
 import classes from './header.module.scss';
-import { getMeta } from '@sortViz/sorting-algorithms/algo-metadata';
+import { getMeta, tierInfo } from '@sortViz/sorting-algorithms/algo-metadata';
 import { useAppSelector } from '@/host/store/hooks';
 
 interface ExtendedHeaderProps extends HeaderProps {
@@ -38,7 +38,15 @@ function Header({ algoName, isCompleted, rank }: ExtendedHeaderProps) {
 
   return (
     <header className={classes.header}>
-      <h2>{meta.displayName}</h2>
+      <h2>
+        {meta.displayName}
+        <span
+          className={`${classes.tier} ${classes[meta.tier]}`}
+          title={`${tierInfo[meta.tier].label} — average ${meta.average}`}
+        >
+          {tierInfo[meta.tier].emoji} {tierInfo[meta.tier].label}
+        </span>
+      </h2>
 
       <div className={classes.complexity} title="Time and space complexity">
         <span className={classes.badge}>

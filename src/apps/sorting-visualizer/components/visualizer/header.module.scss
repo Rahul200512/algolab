@@ -9,10 +9,39 @@
   padding: 8px 4px;
 
   h2 {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
     margin: 0;
     font-size: 1.15rem;
     text-transform: capitalize;
   }
+}
+
+.tier {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 999px;
+}
+
+.tier.fast {
+  color: #04461f;
+  background-color: #b6f3cd;
+}
+
+.tier.ok {
+  color: #5a4400;
+  background-color: #ffe9a8;
+}
+
+.tier.slow {
+  color: #5e0d0d;
+  background-color: #ffc3c3;
 }
 
 .complexity {

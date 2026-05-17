@@ -93,7 +93,15 @@
       }
 
       > label {
+        display: inline-flex;
+        gap: 5px;
+        align-items: center;
         text-transform: capitalize;
+      }
+
+      .tierDot {
+        font-size: 11px;
+        line-height: 1;
       }
     }
   }

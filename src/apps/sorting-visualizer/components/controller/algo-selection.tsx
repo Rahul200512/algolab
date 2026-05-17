@@ -5,6 +5,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import { getMeta, tierInfo } from '@sortViz/sorting-algorithms/algo-metadata';
 import classes from './controls.module.scss';
 
 function AlgoSelection() {
@@ -33,6 +34,12 @@ function AlgoSelection() {
             />
             <label htmlFor={`custom-checkbox-${algoList[idx].name}`}>
               {algoList[idx].name}
+              <span
+                className={classes.tierDot}
+                title={`${tierInfo[getMeta(algoList[idx].name).tier].label} — avg ${getMeta(algoList[idx].name).average}`}
+              >
+                {tierInfo[getMeta(algoList[idx].name).tier].emoji}
+              </span>
             </label>
           </div>
         </li>

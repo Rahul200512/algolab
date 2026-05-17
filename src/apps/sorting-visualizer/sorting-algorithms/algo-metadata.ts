@@ -17,12 +17,25 @@ export interface StepLineMap {
   move: number;
 }
 
+/** Efficiency tier derived from average-case time complexity. */
+export type EfficiencyTier = 'fast' | 'ok' | 'slow';
+
+export const tierInfo: Record<
+  EfficiencyTier,
+  { label: string; emoji: string }
+> = {
+  fast: { label: 'Fast', emoji: '🟢' },
+  ok: { label: 'Moderate', emoji: '🟡' },
+  slow: { label: 'Slow', emoji: '🔴' },
+};
+
 export interface AlgoMetadata {
   displayName: string;
   best: string;
   average: string;
   worst: string;
   space: string;
+  tier: EfficiencyTier;
   description: string;
   pseudocode: string[];
   lineFor: StepLineMap;
@@ -35,6 +48,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n²)',
     worst: 'O(n²)',
     space: 'O(1)',
+    tier: 'slow',
     description:
       'Repeatedly steps through the list, compares adjacent items, and swaps them if they are in the wrong order.',
     pseudocode: [
@@ -54,6 +68,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n²)',
     worst: 'O(n²)',
     space: 'O(1)',
+    tier: 'slow',
     description:
       'Finds the smallest element in the unsorted portion and moves it to the front, one position at a time.',
     pseudocode: [
@@ -72,6 +87,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n²)',
     worst: 'O(n²)',
     space: 'O(1)',
+    tier: 'slow',
     description:
       'Builds the sorted array one element at a time by inserting each into its correct position.',
     pseudocode: [
@@ -91,6 +107,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n log n)',
     worst: 'O(n log n)',
     space: 'O(1)',
+    tier: 'fast',
     description:
       'Builds a max-heap, then repeatedly extracts the largest element to the end of the array.',
     pseudocode: [
@@ -108,6 +125,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n log n)',
     worst: 'O(n log n)',
     space: 'O(n)',
+    tier: 'fast',
     description:
       'Divides the array in half, recursively sorts each half, then merges them back together.',
     pseudocode: [
@@ -126,6 +144,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n log n)',
     worst: 'O(n²)',
     space: 'O(log n)',
+    tier: 'fast',
     description:
       'Picks a pivot and partitions the array so smaller elements go left and larger go right, then recurses.',
     pseudocode: [
@@ -143,6 +162,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n^1.25)',
     worst: 'O(n²)',
     space: 'O(1)',
+    tier: 'ok',
     description:
       'Generalized insertion sort that compares elements far apart and gradually shrinks the gap.',
     pseudocode: [
@@ -163,6 +183,7 @@ export const algoMetadata: Record<string, AlgoMetadata> = {
     average: 'O(n²)',
     worst: 'O(n²)',
     space: 'O(1)',
+    tier: 'slow',
     description:
       'A bidirectional bubble sort: traverses the array forwards and backwards on alternating passes.',
     pseudocode: [
@@ -189,6 +210,7 @@ export function getMeta(name: string): AlgoMetadata {
       average: '—',
       worst: '—',
       space: '—',
+      tier: 'ok',
       description: '',
       pseudocode: [],
       lineFor: { highlight: -1, swap: -1, sort: -1, pivot: -1, move: -1 },
