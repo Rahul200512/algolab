@@ -27,8 +27,8 @@
   padding: 2px 8px;
   font-size: 10px;
   font-weight: 600;
-  text-transform: uppercase;
   color: theme.$light;
+  text-transform: uppercase;
   background-color: theme.$primary;
   border-radius: 999px;
 }
@@ -87,8 +87,8 @@
 
 .lineNumber {
   width: 16px;
+  color: theme.$light;
   text-align: right;
   user-select: none;
   opacity: 0.4;
-  color: theme.$light;
 }

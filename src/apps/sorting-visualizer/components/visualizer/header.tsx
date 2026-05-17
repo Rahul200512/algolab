@@ -8,6 +8,8 @@ import { useAppSelector } from '@/host/store/hooks';
 interface ExtendedHeaderProps extends HeaderProps {
   /** Finish rank in race mode (1 = first). Undefined when not finished or not racing. */
   rank?: number;
+  /** Quiz mode: hide name, complexity and tier so they don't spoil the answer. */
+  hideIdentity?: boolean;
 }
 
 function rankClass(rank?: number) {
@@ -24,7 +26,12 @@ function rankLabel(rank: number) {
   return `#${rank}`;
 }
 
-function Header({ algoName, isCompleted, rank }: ExtendedHeaderProps) {
+function Header({
+  algoName,
+  isCompleted,
+  rank,
+  hideIdentity,
+}: ExtendedHeaderProps) {
   const time = useAppSelector((state) => state.sortViz.time);
   const completionTime = useRef(0);
   const meta = getMeta(algoName);
@@ -39,29 +46,33 @@ function Header({ algoName, isCompleted, rank }: ExtendedHeaderProps) {
   return (
     <header className={classes.header}>
       <h2>
-        {meta.displayName}
-        <span
-          className={`${classes.tier} ${classes[meta.tier]}`}
-          title={`${tierInfo[meta.tier].label} — average ${meta.average}`}
-        >
-          {tierInfo[meta.tier].emoji} {tierInfo[meta.tier].label}
-        </span>
+        {hideIdentity ? 'Mystery Algorithm' : meta.displayName}
+        {!hideIdentity && (
+          <span
+            className={`${classes.tier} ${classes[meta.tier]}`}
+            title={`${tierInfo[meta.tier].label} — average ${meta.average}`}
+          >
+            {tierInfo[meta.tier].emoji} {tierInfo[meta.tier].label}
+          </span>
+        )}
       </h2>
 
-      <div className={classes.complexity} title="Time and space complexity">
-        <span className={classes.badge}>
-          <span className={classes.label}>avg</span>
-          {meta.average}
-        </span>
-        <span className={classes.badge}>
-          <span className={classes.label}>worst</span>
-          {meta.worst}
-        </span>
-        <span className={`${classes.badge} ${classes.space}`}>
-          <span className={classes.label}>space</span>
-          {meta.space}
-        </span>
-      </div>
+      {!hideIdentity && (
+        <div className={classes.complexity} title="Time and space complexity">
+          <span className={classes.badge}>
+            <span className={classes.label}>avg</span>
+            {meta.average}
+          </span>
+          <span className={classes.badge}>
+            <span className={classes.label}>worst</span>
+            {meta.worst}
+          </span>
+          <span className={`${classes.badge} ${classes.space}`}>
+            <span className={classes.label}>space</span>
+            {meta.space}
+          </span>
+        </div>
+      )}
 
       <span>
         Time: <strong>{completionTime.current || time}</strong>

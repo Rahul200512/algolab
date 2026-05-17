@@ -11,6 +11,8 @@ interface RaceProps extends VisualizerProps {
   rank?: number;
   /** When true, publish the active pseudocode line (single-algorithm view only). */
   trackLine?: boolean;
+  /** Quiz mode: hide the algorithm name/complexity so it isn't spoiled. */
+  hideIdentity?: boolean;
 }
 
 const Visualizer = function Visualizer({
@@ -20,6 +22,7 @@ const Visualizer = function Visualizer({
   onComplete,
   rank,
   trackLine = false,
+  hideIdentity = false,
 }: RaceProps) {
   const sortingArray = useRef([...array]);
 
@@ -42,7 +45,12 @@ const Visualizer = function Visualizer({
 
   return (
     <section className={classes.container}>
-      <Header algoName={algoName} isCompleted={isCompleted} rank={rank} />
+      <Header
+        algoName={algoName}
+        isCompleted={isCompleted}
+        rank={rank}
+        hideIdentity={hideIdentity}
+      />
 
       <VisualizerDisplay
         pivot={pivot}

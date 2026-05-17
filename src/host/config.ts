@@ -14,6 +14,11 @@ export const challengesList = [
     img: raceModeImage,
   },
   {
+    name: 'Quiz Mode',
+    link: '/quiz',
+    img: sortingVisualizerImage,
+  },
+  {
     name: 'Path Finder',
     link: '/path-finder/',
     img: pathFinderImage,

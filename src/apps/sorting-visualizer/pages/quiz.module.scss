@@ -1,0 +1,125 @@
+@use '/src/host/styles/theme';
+
+.quiz {
+  max-width: 900px;
+  padding: 16px 20px 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  h1 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+}
+
+.back {
+  color: theme.$primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.score {
+  font-size: 14px;
+}
+
+.prompt {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: theme.$base;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin: 28px 0 8px;
+}
+
+.option {
+  min-width: 130px;
+  padding: 12px 20px;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 15px;
+  color: theme.$light;
+  cursor: pointer;
+  background-color: theme.$primary;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.option.correct {
+  background-color: #1f9d57;
+  border-color: #b6f3cd;
+}
+
+.option.wrong {
+  background-color: #c0392b;
+  border-color: #ffc3c3;
+}
+
+.result {
+  max-width: 560px;
+  padding: 18px;
+  margin: 20px auto 0;
+  background-color: theme.$background;
+  border: 1px solid theme.$shadow1;
+  border-radius: 8px;
+}
+
+.win {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f9d57;
+}
+
+.lose {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #c0392b;
+}
+
+.reveal {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: theme.$base;
+}
+
+.next {
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: theme.$light;
+  cursor: pointer;
+  background-color: theme.$primary;
+  border: none;
+  border-radius: 6px;
+
+  &:hover {
+    opacity: 0.88;
+  }
+}
