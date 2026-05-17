@@ -6,12 +6,18 @@ import { VisualizerProps } from '@sortViz/models/interfaces';
 import classes from './visualizer.module.scss';
 import useAlgo from '@sortViz/hooks/use-algo.hook';
 
+interface RaceProps extends VisualizerProps {
+  /** Finish position assigned by parent (1 = first). Optional — only used in race mode. */
+  rank?: number;
+}
+
 const Visualizer = function Visualizer({
   array,
   algoFn,
   algoName = 'Bubble',
   onComplete,
-}: VisualizerProps) {
+  rank,
+}: RaceProps) {
   const sortingArray = useRef([...array]);
 
   const {
@@ -27,13 +33,13 @@ const Visualizer = function Visualizer({
 
   useEffect(() => {
     if (isCompleted) {
-      onComplete();
+      onComplete(algoName);
     }
-  }, [isCompleted, onComplete]);
+  }, [isCompleted, onComplete, algoName]);
 
   return (
     <section className={classes.container}>
-      <Header algoName={algoName} isCompleted={isCompleted} />
+      <Header algoName={algoName} isCompleted={isCompleted} rank={rank} />
 
       <VisualizerDisplay
         pivot={pivot}

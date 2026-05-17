@@ -24,7 +24,10 @@ function AllAlgorithmLayout() {
   if (selectedAlgos.length === 0) {
     selectedAlgos = algoList;
   }
-  const { onComplete, isComplete } = useCompletion(selectedAlgos.length, reset);
+  const { onComplete, isComplete, getRank } = useCompletion(
+    selectedAlgos.length,
+    reset
+  );
 
   useEffect(() => {
     if (isComplete) {
@@ -53,6 +56,7 @@ function AllAlgorithmLayout() {
             algoName={algo.name}
             algoFn={algo.fn}
             onComplete={onComplete}
+            rank={getRank(algo.name)}
           />
         ))}
       </div>

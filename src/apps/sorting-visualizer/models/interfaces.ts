@@ -29,6 +29,7 @@ export interface UIProps {
 export interface HeaderProps {
   algoName: string;
   isCompleted: boolean;
+  rank?: number;
 }
 
 export interface NumberGenProps {
@@ -39,7 +40,8 @@ export interface VisualizerProps {
   array: number[];
   algoName: string;
   algoFn: (array: number[]) => SortAsyncGenerator;
-  onComplete: () => void;
+  /** Called when the algorithm finishes; receives the algorithm name so the parent can compute finish order. */
+  onComplete: (algoName?: string) => void;
 }
 
 export interface AppState {
