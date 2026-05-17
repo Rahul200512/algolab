@@ -2,8 +2,10 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import MainLayout from './main.layout';
 import NoInput from '@sortViz/components/visualizer/no-input';
+import PseudocodePanel from '@sortViz/components/pseudocode/pseudocode-panel';
 import Visualizer from '@sortViz/components/visualizer/visualizer';
 import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import classes from './layout.module.scss';
 import { setIsPlaying } from '@sortViz/store/sorting-visualizer.slice';
 import { sortCompletionMessage } from '@sortViz/config';
 import { toast } from 'sonner';
@@ -38,13 +40,16 @@ function SingleAlgorithmLayout() {
 
   return (
     <MainLayout>
-      <Visualizer
-        key={selectedAlgo.name + array.toString() + reset}
-        array={array}
-        algoName={selectedAlgo.name}
-        algoFn={selectedAlgo.fn}
-        onComplete={onComplete}
-      />
+      <div className={classes.singleAlgo}>
+        <Visualizer
+          key={selectedAlgo.name + array.toString() + reset}
+          array={array}
+          algoName={selectedAlgo.name}
+          algoFn={selectedAlgo.fn}
+          onComplete={onComplete}
+        />
+        <PseudocodePanel algoName={selectedAlgo.name} />
+      </div>
     </MainLayout>
   );
 }
